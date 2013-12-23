@@ -545,7 +545,7 @@ func main() {
     xe, _ := os.Open("/var/lib/vdr/xmltv-epg.xml")
 
     options := struct {
-        goptions.Help `goptions:"-h, --help, description='Show this help'"`
+        goptions.Help `goptions:"--help, description='Show this help'"`
 
         Verbose bool `goptions:"-v, --verbose, description='verbose'"`
         Debug   bool `goptions:"-d, --debug, description='trace execution'"`
@@ -558,8 +558,6 @@ func main() {
         goptions.Verbs
         EPGLoad struct {
         }   `goptions:"epg-load"`
-        EPGClear struct {
-        }   `goptions:"epg-clear"`
     }{
         VDRHost:         "127.0.0.1:6419",
         VDRChannelsFile: vc,
@@ -652,7 +650,6 @@ func main() {
         close(comm)
 
         <-conn
-    case "epg-clear":
     default:
         goptions.PrintHelp()
         l.Fatalln("command: no command specified")
